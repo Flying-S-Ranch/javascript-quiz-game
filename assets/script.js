@@ -6,6 +6,7 @@ var answerA = document.querySelector("#a")
 var answerB = document.querySelector("#b")
 var answerC = document.querySelector("#c")
 var answerD = document.querySelector("#d")
+var scoreEl = document.querySelector("#score")
 
 // DATA / STATE
 var secondsLeft = 15;
@@ -19,7 +20,7 @@ var answerContentD;
 var question1 = {
     content: "this is the content of question one",
     a: "question 1 option A",
-    b: "question 1 option B",
+    b: "CORRECT",
     c: "question 1 option C",
     d: "question 1 option D"
 }
@@ -29,19 +30,19 @@ var question2 = {
     a: "question 2 option A",
     b: "question 2 option B",
     c: "question 2 option C",
-    d: "question 2 option D"
+    d: "CORRECT"
 }
 
 var question3 = {
     content: "this is the content of question three",
-    a: "question 3 option A",
+    a: "CORRECT",
     b: "question 3 option B",
     c: "question 3 option C",
     d: "question 3 option D"
 }
 
 var quizQuestions = [question1, question2, question3]
-var quizAnswers= ["B", "C", "A"]
+var quizAnswers= ["B", "D", "A", "B", "A", "C", "C", "D", "A", "C"]
 
 
 console.log(quizQuestions[0]);
@@ -58,6 +59,12 @@ function runTimer() {
     }, 1000)
 }
 
+function displayScore() {
+  scoreBox = document.createElement("p");
+  scoreBox.textContent = "Score: " + score
+  scoreEl.appendChild(scoreBox)
+}
+
 function alarmClock() {
     timeEl.textContent = "Time's Up!";
     timeEl.setAttribute("style", "font-size: 50px")
@@ -67,8 +74,6 @@ function alarmClock() {
     answerC.textContent = " "
     answerD.textContent = " "
 }
-
-
 
 // function runQuiz() {
 //   for(i = 0; i < quizQuestions.length; i++) {
@@ -85,8 +90,8 @@ function alarmClock() {
 function displayQuestion() {
   var quizContent = document.createElement("div")
   quizContent.textContent = quizQuestions[0].content;
-//   console.log(question1.content);
-  questionEl.appendChild(quizContent);
+  console.log(quizQuestions[0].content);
+  answerA.appendChild(quizContent);
 }
 
 function displayAnswers() {
@@ -94,25 +99,25 @@ function displayAnswers() {
   answerContentA = document.createElement("p");
   answerContentA.textContent= "A: " + quizQuestions[0].a;
 //   console.log(question1.a);
-  answerA.appendChild(answerContentA);
+answerA.appendChild(answerContentA);
 
   // this code displays answer B
   answerContentB = document.createElement("p");
   answerContentB.textContent= "B: " + quizQuestions[0].b;
 //   console.log(question1.b);
-  answerB.appendChild(answerContentB);
+answerB.appendChild(answerContentB);
 
   // this code displays answer C
   answerContentC = document.createElement("p");
   answerContentC.textContent= "C: " + quizQuestions[0].c;
 //   console.log(question1.c);
-  answerC.appendChild(answerContentC);
+answerC.appendChild(answerContentC);
 
   // this code displays answer D
   answerContentD = document.createElement("p");
   answerContentD.textContent= "D: " + quizQuestions[0].d;
 //   console.log(question1.d);
-  answerD.appendChild(answerContentD);
+answerD.appendChild(answerContentD);
 }
 
 function resolveAnswer() {
@@ -123,6 +128,8 @@ if(isCorrect) {
 // add five points to score
 score = score + 5;
 console.log(score)
+scoreBox.textContent = " "
+displayScore();
 } else {
 // if no, 
   // subtract 10 seconds from time
@@ -147,6 +154,7 @@ startBtn.addEventListener("click", function(){
     // answers appear
     displayAnswers();
     // runQuiz();
+    displayScore();
 } )
   
 // user clicks on answer
