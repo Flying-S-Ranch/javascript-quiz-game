@@ -16,7 +16,9 @@ var answerContentA;
 var answerContentB;
 var answerContentC;
 var answerContentD;
+var i;
 
+// tutor advised me on the best way to organize this data
 var question1 = {
     content: "this is the content of question one",
     a: "question 1 option A",
@@ -91,7 +93,7 @@ function displayQuestion() {
   var quizContent = document.createElement("div")
   quizContent.textContent = quizQuestions[0].content;
   console.log(quizQuestions[0].content);
-  answerA.appendChild(quizContent);
+  questionEl.appendChild(quizContent);
 }
 
 function displayAnswers() {
@@ -121,27 +123,77 @@ answerD.appendChild(answerContentD);
 }
 
 function resolveAnswer() {
-//answer correct?
-var isCorrect = (userAnswer === "B");
-// if yes,
-if(isCorrect) {
-// add five points to score
-score = score + 5;
-console.log(score)
-scoreBox.textContent = " "
-displayScore();
-} else {
-// if no, 
-  // subtract 10 seconds from time
-  secondsLeft = secondsLeft - 5;
+  // user clicks on answer
+answerA.addEventListener("click", function(){
+  userAnswer = "A"
+  console.log(userAnswer)
+  // resolveAnswer();
+})
+
+answerB.addEventListener("click", function(){
+  userAnswer = "B"
+  console.log(userAnswer)
+})
+
+answerC.addEventListener("click", function(){
+  userAnswer = "C"
+  console.log(userAnswer)
+  // resolveAnswer();
+})
+
+answerD.addEventListener("click", function(){
+  userAnswer = "D"
+  console.log(userAnswer)
+  // resolveAnswer();
+})
+  for (i=0; i<quizQuestions.length; i++) {
+   //answer correct?
+   var isCorrect = (userAnswer === quizAnswers[i]);
+   // if yes,
+   if(isCorrect) {
+      // add five points to score
+      score = score + 5;
+      console.log(score)
+      scoreBox.textContent = " "
+      displayScore();
+   } else {
+   // if no, 
+   // subtract 10 seconds from time
+   secondsLeft = secondsLeft - 5;
 }
 // move on to next question
-questionEl.textContent = quizQuestions[1].content;
-answerContentA.textContent= "A: " + quizQuestions[1].a;
-answerContentB.textContent= "B: " + quizQuestions[1].b;
-answerContentC.textContent= "C: " + quizQuestions[1].c;
-answerContentD.textContent= "D: " + quizQuestions[1].d;
-}
+questionEl.textContent = quizQuestions[(i+1)].content;
+answerContentA.textContent= "A: " + quizQuestions[(i+1)].a;
+answerContentB.textContent= "B: " + quizQuestions[(i+1)].b;
+answerContentC.textContent= "C: " + quizQuestions[(i+1)].c;
+answerContentD.textContent= "D: " + quizQuestions[(i+1)].d;
+
+  }
+  
+  }
+
+// function resolveAnswer() {
+// //answer correct?
+// var isCorrect = (userAnswer === quizAnswers[i]);
+// // if yes,
+// if(isCorrect) {
+// // add five points to score
+// score = score + 5;
+// console.log(score)
+// scoreBox.textContent = " "
+// displayScore();
+// } else {
+// // if no, 
+//   // subtract 10 seconds from time
+//   secondsLeft = secondsLeft - 5;
+// }
+// // move on to next question
+// questionEl.textContent = quizQuestions[1].content;
+// answerContentA.textContent= "A: " + quizQuestions[1].a;
+// answerContentB.textContent= "B: " + quizQuestions[1].b;
+// answerContentC.textContent= "C: " + quizQuestions[1].c;
+// answerContentD.textContent= "D: " + quizQuestions[1].d;
+// }
 
 
 // USER INTERACTIONS
@@ -155,31 +207,31 @@ startBtn.addEventListener("click", function(){
     displayAnswers();
     // runQuiz();
     displayScore();
+    resolveAnswer();
 } )
   
 // user clicks on answer
 answerA.addEventListener("click", function(){
     userAnswer = "A"
     console.log(userAnswer)
-    resolveAnswer();
+    // resolveAnswer();
 })
 
 answerB.addEventListener("click", function(){
     userAnswer = "B"
     console.log(userAnswer)
-    resolveAnswer();
 })
 
 answerC.addEventListener("click", function(){
     userAnswer = "C"
     console.log(userAnswer)
-    resolveAnswer();
+    // resolveAnswer();
 })
 
 answerD.addEventListener("click", function(){
     userAnswer = "D"
     console.log(userAnswer)
-    resolveAnswer();
+    // resolveAnswer();
 })
   
 // INITIALIZATIONS
