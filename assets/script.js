@@ -8,7 +8,9 @@ var answerC = document.querySelector("#c")
 var answerD = document.querySelector("#d")
 
 // DATA / STATE
-var secondsLeft = 5;
+var secondsLeft = 15;
+var score = 0
+var userAnswer;
 
 var question1 = {
     content: "this is the content of question one",
@@ -45,7 +47,7 @@ function runTimer() {
     var timerInterval = setInterval(function() {
         secondsLeft--;
         timeEl.textContent = ":"+ secondsLeft;
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0) {
             clearInterval(timerInterval)
             alarmClock()
         }
@@ -64,7 +66,7 @@ function alarmClock() {
 
 function displayQuestion() {
   var quizContent = document.createElement("div")
-  quizContent.textContent = question1.content;
+  quizContent.textContent = quizQuestions[0].content;
   console.log(question1.content);
   questionEl.appendChild(quizContent);
 }
@@ -72,28 +74,47 @@ function displayQuestion() {
 function displayAnswers() {
   // this code displays answer A
   var answerContentA = document.createElement("p");
-  answerContentA.textContent= question1.a;
+  answerContentA.textContent= "A: " + quizQuestions[0].a;
   console.log(question1.a);
   answerA.appendChild(answerContentA);
 
   // this code displays answer B
   var answerContentB = document.createElement("p");
-  answerContentB.textContent= question1.b;
+  answerContentB.textContent= "B: " + quizQuestions[0].b;
   console.log(question1.b);
   answerB.appendChild(answerContentB);
 
   // this code displays answer C
   var answerContentC = document.createElement("p");
-  answerContentC.textContent= question1.c;
+  answerContentC.textContent= "C: " + quizQuestions[0].c;
   console.log(question1.c);
   answerC.appendChild(answerContentC);
 
   // this code displays answer D
   var answerContentD = document.createElement("p");
-  answerContentD.textContent= question1.d;
+  answerContentD.textContent= "D: " + quizQuestions[0].d;
   console.log(question1.d);
   answerD.appendChild(answerContentD);
 }
+
+function resolveAnswer() {
+//answer correct?
+var isCorrect = (userAnswer === "B");
+// if yes,
+if(isCorrect) {
+// add five points to score
+score = score + 5;
+console.log(score)
+} else {
+// if no, 
+  // subtract 10 seconds from time
+  secondsLeft = secondsLeft - 5;
+}
+// move on to next question
+questionEl.textContent = " "
+
+}
+
 
 // USER INTERACTIONS
 // user clicks start button
@@ -106,15 +127,34 @@ startBtn.addEventListener("click", function(){
     displayAnswers();
 } )
   
-
 // user clicks on answer
-  //answer correct?
-    // if yes,
-      // add five points
-      // move on to next question
-    // if no, 
-      // subtract 10 seconds from time
-      // move on to next question
+answerA.addEventListener("click", function(){
+    userAnswer = "A"
+    console.log(userAnswer)
+    resolveAnswer();
+})
+
+answerB.addEventListener("click", function(){
+    userAnswer = "B"
+    console.log(userAnswer)
+    resolveAnswer();
+})
+
+answerC.addEventListener("click", function(){
+    userAnswer = "C"
+    console.log(userAnswer)
+    resolveAnswer();
+})
+
+answerD.addEventListener("click", function(){
+    userAnswer = "D"
+    console.log(userAnswer)
+    resolveAnswer();
+})
+  
+    
+      
+    
 
 // INITIALIZATIONS
 // nothing begins immediately when the page is loaded
