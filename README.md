@@ -6,4 +6,8 @@ This webpage is an interactive quiz to help users practice questions about JavaS
 ## Usage
 
 ## Credits
-A tutor instructed me on the best way to organize data for the questions
+Tutor Scott McAnally advised me on the best way to organize the quiz content within an array (lines 24-42), and that I should iterate through the array by setting the index as a variable (lines 109-206).
+
+I learned how to remove a child element (lines 168-173) from a W3 Schools article called "HTML DOM Element removeChild()". This article can be accessed here: https://www.w3schools.com/jsref/met_node_removechild.asp
+
+Items within quotes in the quiz questions are taken from notes made during week three lectures.

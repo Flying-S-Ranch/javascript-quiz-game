@@ -20,26 +20,38 @@ var answerContentD;
 var quizContent;
 var timerInterval;
 
-// a tutor advised me on the best way to organize the quiz content
+// tutor Scott McAnally advised me on the best way to organize the quiz content (lines 24-42)
 var question1 = {
-    content: "this is the content of question one",
-    answers: ["question 1 option A", "question 1 option B", "question 1 option C", "question 1 option D"],
+    content: "What HTML element is used to add JavaScript to an HTML file?",
+    answers: ["<link>", "<script>", "<a>", "<div>"],
     correct: "B"
 }
 
 var question2 = {
-    content: "this is the content of question two",
-    answers: ["question 2 option A", "question 2 option B", "question 2 option C", "question 2 option D"],
+    content: "Which of the following is not a useful division for JavaScript files?",
+    answers: ["//DEPENDENCIES", "//USER INTERACTIONS", "//FUNCTIONS", "//STYLES"],
     correct: "D"
 }
 
 var question3 = {
-    content: "this is the content of question three",
-    answers: ["question 3 option A", "question 3 option B", "question 3 option C", "question 3 option D"],
+    content: "Which of the following 'leaves an array unchanged, but adds selected elements to a new array'?",
+    answers: ["Slice", "Split", "Splice", "Shift"],
     correct: "A"
 }
 
-var quizQuestions = [question1, question2, question3]
+var question4 = {
+    content: "What is defined as 'a reusable block of code that performs a specific task'?",
+    answers: ["a conditional", "a function", "an array", "a variable"],
+    correct: "B"
+}
+
+var question5 = {
+    content: "Which of these is most helpful if you want to store an ordered list of items?",
+    answers: ["an array", "a variable", "a string", "a function"],
+    correct: "A"
+}
+
+var quizQuestions = [question1, question2, question3, question4, question5]
 console.log(quizQuestions.length);
 
 
@@ -106,6 +118,7 @@ function displayQuestion() {
   answerD.appendChild(answerContentD);
   }
 
+  // tutor Scott McAnally advised me to iterate through the quizQuestions array by setting the index as a variable (lines 109-206)
   function resolveAnswer() {
     var position = 0
     answerA.addEventListener("click", function(){
