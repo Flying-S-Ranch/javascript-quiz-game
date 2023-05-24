@@ -13,11 +13,13 @@ var scoreEl = document.querySelector("#score")
 // DATA / STATE
 var secondsLeft = 15;
 var score = 0
+var position = 0
 var userAnswer;
 var answerContentA;
 var answerContentB;
 var answerContentC;
 var answerContentD;
+var quizContent;
 
 // a tutor advised me on the best way to organize the quiz content
 var question1 = {
@@ -39,6 +41,7 @@ var question3 = {
 }
 
 var quizQuestions = [question1, question2, question3]
+console.log(quizQuestions.length);
 
 
 console.log(quizQuestions[2]);
@@ -73,8 +76,8 @@ function alarmClock() {
 
 function displayQuestion() {
     var quizContent = document.createElement("div")
-    quizContent.textContent = quizQuestions[0].content;
-    console.log(quizQuestions[0].content);
+    quizContent.textContent = quizQuestions[position].content;
+    console.log(quizQuestions[position].content);
     questionEl.appendChild(quizContent);
   }
   
@@ -105,20 +108,70 @@ function displayQuestion() {
   }
 
   function resolveAnswer() {
+    var position = 0
+    answerA.addEventListener("click", function(){
+        userAnswer = "A"
+        console.log(userAnswer)
+        evaluateAnswer();
+        determinePosition();
+    })
+    
+    answerB.addEventListener("click", function(){
+        userAnswer = "B"
+        console.log(userAnswer)
+        evaluateAnswer();
+        determinePosition();
+    })
+    
+    answerC.addEventListener("click", function(){
+        userAnswer = "C"
+        console.log(userAnswer)
+        evaluateAnswer();
+        determinePosition();
+    })
+    
+    answerD.addEventListener("click", function(){
+        userAnswer = "D"
+        console.log(userAnswer)
+        evaluateAnswer();
+        determinePosition();
+    })
     //answer correct?
-    var isCorrect = (userAnswer === "B");
-    // if yes,
-    if(isCorrect) {
-    // add five points to score
-    score = score + 5;
-    console.log(score)
-    scoreBox.textContent = " "
-    displayScore();
-    } else {
-    // if no, 
-    // subtract 5 seconds from time
-    secondsLeft = secondsLeft - 5;
+    function evaluateAnswer() {
+        var isCorrect = (userAnswer === quizQuestions[position].correct);
+        // if yes,
+        if(isCorrect) {
+        // add five points to score
+        score = score + 5;
+        console.log(score)
+        scoreBox.textContent = " "
+        displayScore();
+        } else {
+        // if no, 
+        // subtract 5 seconds from time
+        secondsLeft = secondsLeft - 5;
+      }
     }
+
+    // are we at the end of the quiz?
+    function determinePosition() {
+        if (position === (quizQuestions.length - 1)) {
+            console.log("game over!")
+            
+        } else {
+            
+            position = position + 1;
+            console.log(position);
+            // displayQuestion();
+            // displayAnswers()
+        }
+    }
+    
+    // quizContent.textContent = ""
+    // answerContentA.textContent = ""
+    // answerContentB.textContent = ""
+    // answerContentC.textContent = ""
+    // answerContentD.textContent = ""
 
 }
 
@@ -139,26 +192,3 @@ startBtn.addEventListener("click", function(){
 
 // user clicks on answer
 
-answerA.addEventListener("click", function(){
-    userAnswer = "A"
-    console.log(userAnswer)
-    resolveAnswer();
-})
-
-answerB.addEventListener("click", function(){
-    userAnswer = "B"
-    console.log(userAnswer)
-    resolveAnswer();
-})
-
-answerC.addEventListener("click", function(){
-    userAnswer = "C"
-    console.log(userAnswer)
-    resolveAnswer();
-})
-
-answerD.addEventListener("click", function(){
-    userAnswer = "D"
-    console.log(userAnswer)
-    resolveAnswer();
-})
