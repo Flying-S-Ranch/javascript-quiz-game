@@ -7,6 +7,9 @@ var answerB = document.querySelector("#b")
 var answerC = document.querySelector("#c")
 var answerD = document.querySelector("#d")
 var scoreEl = document.querySelector("#score")
+var initialsEl = document.querySelector("#initials")
+var playersEl = document.querySelector("#players")
+var rankEl = document.querySelector("#rank")
 
 // DATA / STATE
 var secondsLeft = 15;
@@ -19,6 +22,9 @@ var answerContentC;
 var answerContentD;
 var quizContent;
 var timerInterval;
+var initialForm;
+var playerList;
+var userInitials
 
 // tutor Scott McAnally advised me on the best way to organize the quiz content (lines 24-42)
 var question1 = {
@@ -83,6 +89,7 @@ function alarmClock() {
     answerB.textContent = " "
     answerC.textContent = " "
     answerD.textContent = " "
+    addInitials();
 }
 
 function displayQuestion() {
@@ -116,6 +123,23 @@ function displayQuestion() {
     answerContentD.textContent= "D: " + quizQuestions[position].answers[3];
   //   console.log(question1.d);
   answerD.appendChild(answerContentD);
+  }
+
+  function addInitials(event) {
+    var initialInstructions = document.createElement("p")
+    initialInstructions.textContent = 'What are your initials?';
+    rankEl.appendChild(initialInstructions)
+    initialForm = document.createElement("input")
+    initialsEl.appendChild(initialForm);
+    
+  }
+
+  function placeInitials(){
+    userInitials = initialForm.value
+    playerList = document.createElement("li")
+    playerList.textContent = userInitials + " | Score: " + score
+    playersEl.appendChild(playerList)
+
   }
 
   // tutor Scott McAnally advised me to iterate through the quizQuestions array by setting the index as a variable (lines 109-206)
@@ -175,6 +199,7 @@ function displayQuestion() {
             answerB.textContent = " "
             answerC.textContent = " "
             answerD.textContent = " "
+            addInitials()
             
         } else {
             questionEl.removeChild(quizContent);
@@ -217,11 +242,6 @@ function displayQuestion() {
         }
     }
     
-    // quizContent.textContent = ""
-    // answerContentA.textContent = ""
-    // answerContentB.textContent = ""
-    // answerContentC.textContent = ""
-    // answerContentD.textContent = ""
 
 }
 
@@ -240,5 +260,6 @@ startBtn.addEventListener("click", function(){
       resolveAnswer();
   } )
 
-// user clicks on answer
+// user submits initials
+initialForm.addEventListener("submit", placeInitials)
 
