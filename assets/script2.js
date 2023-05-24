@@ -20,6 +20,7 @@ var answerContentB;
 var answerContentC;
 var answerContentD;
 var quizContent;
+var timerInterval;
 
 // a tutor advised me on the best way to organize the quiz content
 var question1 = {
@@ -48,7 +49,7 @@ console.log(quizQuestions[2]);
 
 // FUNCTIONS
 function runTimer() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         timeEl.textContent = ":"+ secondsLeft;
         if (secondsLeft <= 0) {
@@ -75,7 +76,7 @@ function alarmClock() {
 }
 
 function displayQuestion() {
-    var quizContent = document.createElement("div")
+    quizContent = document.createElement("div")
     quizContent.textContent = quizQuestions[position].content;
     console.log(quizQuestions[position].content);
     questionEl.appendChild(quizContent);
@@ -143,10 +144,9 @@ function displayQuestion() {
         if(isCorrect) {
         // add five points to score
         score = score + 5;
-        console.log(score)
         scoreBox.textContent = " "
         displayScore();
-        } else {
+        } else if (!isCorrect) {
         // if no, 
         // subtract 5 seconds from time
         secondsLeft = secondsLeft - 5;
@@ -157,13 +157,20 @@ function displayQuestion() {
     function determinePosition() {
         if (position === (quizQuestions.length - 1)) {
             console.log("game over!")
+            questionEl.textContent = "That's all the questions :)";
+            clearInterval(timerInterval)
+            questionEl.setAttribute("style", "font-size: 50px")
+            answerA.textContent = " "
+            answerB.textContent = " "
+            answerC.textContent = " "
+            answerD.textContent = " "
             
         } else {
-            
             position = position + 1;
             console.log(position);
-            // displayQuestion();
-            // displayAnswers()
+            displayQuestion();
+            console.log(quizQuestions[position].content)
+            displayAnswers()
         }
     }
     
