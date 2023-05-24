@@ -12,7 +12,7 @@ var playersEl = document.querySelector("#players")
 var rankEl = document.querySelector("#rank")
 
 // DATA / STATE
-var secondsLeft = 15;
+var secondsLeft = 60;
 var score = 0
 var position = 0
 var userAnswer;
@@ -24,9 +24,8 @@ var quizContent;
 var timerInterval;
 var initialForm;
 var playerList;
-var userInitials
 
-// tutor Scott McAnally advised me on the best way to organize the quiz content (lines 24-42)
+// tutor Scott McAnally advised me on the best way to organize the quiz content (lines 29-57)
 var question1 = {
     content: "What HTML element is used to add JavaScript to an HTML file?",
     answers: ["<link>", "<script>", "<a>", "<div>"],
@@ -125,24 +124,26 @@ function displayQuestion() {
   answerD.appendChild(answerContentD);
   }
 
-  function addInitials(event) {
+  function addInitials() {
     var initialInstructions = document.createElement("p")
     initialInstructions.textContent = 'What are your initials?';
     rankEl.appendChild(initialInstructions)
     initialForm = document.createElement("input")
     initialsEl.appendChild(initialForm);
+    initialForm.addEventListener("keypress", placeInitials);
+    console.log(initialForm.value)
     
   }
 
-  function placeInitials(){
-    userInitials = initialForm.value
+  function placeInitials(event){
+    event.preventDefault
     playerList = document.createElement("li")
-    playerList.textContent = userInitials + " | Score: " + score
+    playerList.textContent = initialForm.value + " | Score: " + score
     playersEl.appendChild(playerList)
 
   }
 
-  // tutor Scott McAnally advised me to iterate through the quizQuestions array by setting the index as a variable (lines 109-206)
+  // tutor Scott McAnally advised me to iterate through the quizQuestions array by setting the index as a variable (lines 147-247)
   function resolveAnswer() {
     var position = 0
     answerA.addEventListener("click", function(){
@@ -183,8 +184,8 @@ function displayQuestion() {
         displayScore();
         } else if (!isCorrect) {
         // if no, 
-        // subtract 5 seconds from time
-        secondsLeft = secondsLeft - 5;
+        // subtract 10 seconds from time
+        secondsLeft = secondsLeft - 10;
       }
     }
 
@@ -192,7 +193,7 @@ function displayQuestion() {
     function determinePosition() {
         if (position === (quizQuestions.length - 1)) {
             console.log("game over!")
-            questionEl.textContent = "That's all the questions :)";
+            questionEl.textContent = "You've come to the end of the questions :)";
             clearInterval(timerInterval)
             questionEl.setAttribute("style", "font-size: 50px")
             answerA.textContent = " "
@@ -261,5 +262,5 @@ startBtn.addEventListener("click", function(){
   } )
 
 // user submits initials
-initialForm.addEventListener("submit", placeInitials)
+// initialForm.addEventListener("submit", placeInitials);
 
