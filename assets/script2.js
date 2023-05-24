@@ -2,8 +2,6 @@
 var startBtn = document.querySelector("#start")
 var timeEl = document.querySelector("#time")
 var questionEl = document.querySelector("#question")
-var answersEl = document.querySelectorAll(".answers")
-console.log(answersEl)
 var answerA = document.querySelector("#a")
 var answerB = document.querySelector("#b")
 var answerC = document.querySelector("#c")
@@ -78,32 +76,32 @@ function alarmClock() {
 function displayQuestion() {
     quizContent = document.createElement("div")
     quizContent.textContent = quizQuestions[position].content;
-    console.log(quizQuestions[position].content);
+    // console.log(quizQuestions[position].content);
     questionEl.appendChild(quizContent);
   }
   
   function displayAnswers() {
     // this code displays answer A
     answerContentA = document.createElement("p");
-    answerContentA.textContent= "A: " + quizQuestions[0].answers[0];
+    answerContentA.textContent= "A: " + quizQuestions[position].answers[0];
   //   console.log(question1.a);
   answerA.appendChild(answerContentA);
   
     // this code displays answer B
     answerContentB = document.createElement("p");
-    answerContentB.textContent= "B: " + question1.answers[1];
+    answerContentB.textContent= "B: " + quizQuestions[position].answers[1];
   //   console.log(question1.b);
   answerB.appendChild(answerContentB);
   
     // this code displays answer C
     answerContentC = document.createElement("p");
-    answerContentC.textContent= "C: " + question1.answers[2];
+    answerContentC.textContent= "C: " + quizQuestions[position].answers[2];
   //   console.log(question1.c);
   answerC.appendChild(answerContentC);
   
     // this code displays answer D
     answerContentD = document.createElement("p");
-    answerContentD.textContent= "D: " + question1.answers[3];
+    answerContentD.textContent= "D: " + quizQuestions[position].answers[3];
   //   console.log(question1.d);
   answerD.appendChild(answerContentD);
   }
@@ -166,11 +164,43 @@ function displayQuestion() {
             answerD.textContent = " "
             
         } else {
+            questionEl.removeChild(quizContent);
+            console.log(questionEl);
+            answerA.removeChild(answerContentA);
+            answerB.removeChild(answerContentB);
+            answerC.removeChild(answerContentC);
+            answerD.removeChild(answerContentD);
+
             position = position + 1;
             console.log(position);
-            displayQuestion();
             console.log(quizQuestions[position].content)
-            displayAnswers()
+            quizContent = document.createElement("div")
+            quizContent.textContent = quizQuestions[position].content;
+            // console.log(quizQuestions[position].content);
+            questionEl.appendChild(quizContent);
+            // this code displays answer A
+    answerContentA = document.createElement("p");
+    answerContentA.textContent= "A: " + quizQuestions[position].answers[0];
+  //   console.log(question1.a);
+  answerA.appendChild(answerContentA);
+  
+    // this code displays answer B
+    answerContentB = document.createElement("p");
+    answerContentB.textContent= "B: " + quizQuestions[position].answers[1];
+  //   console.log(question1.b);
+  answerB.appendChild(answerContentB);
+  
+    // this code displays answer C
+    answerContentC = document.createElement("p");
+    answerContentC.textContent= "C: " + quizQuestions[position].answers[2];
+  //   console.log(question1.c);
+  answerC.appendChild(answerContentC);
+  
+    // this code displays answer D
+    answerContentD = document.createElement("p");
+    answerContentD.textContent= "D: " + quizQuestions[position].answers[3];
+  //   console.log(question1.d);
+  answerD.appendChild(answerContentD);
         }
     }
     
